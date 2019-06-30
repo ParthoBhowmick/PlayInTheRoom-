@@ -17,7 +17,6 @@ public class CartRepository {
         CartDatabase database = CartDatabase.getInstance(application);
         cartDao = database.cartDao();
         allCarts = cartDao.getAllCarts();
-        //cart = cartDao.findProductnAction(S)
     }
 
     public void insert(Cart note) {
@@ -41,8 +40,10 @@ public class CartRepository {
     }
 
     public Cart findProductnAction(String productName) {
-        return cart;
+        return cartDao.findProductnAction(productName);
     }
+
+
 
     private static class InsertCartAsyncTask extends AsyncTask<Cart, Void, Void> {
         private CartDao cartDao;

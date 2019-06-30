@@ -5,12 +5,31 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "cart_table")
 public class Cart {
+    public Cart(int id, String product_name, String sku, String displayImg, String vaiants, int qunatity, int stock, float product_price) {
+        this.id = id;
+        this.product_name = product_name;
+        this.sku = sku;
+        this.displayImg = displayImg;
+        this.vaiants = vaiants;
+        this.qunatity = qunatity;
+        this.stock = stock;
+        this.product_price = product_price;
+    }
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String product_name,sku,displayImg,vaiants;
     private int qunatity,stock;
+
+    public int getId() {
+        return id;
+    }
+
+    public float getProduct_price() {
+        return product_price;
+    }
+
     private float product_price;
 
 

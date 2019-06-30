@@ -44,9 +44,9 @@ public abstract class CartDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-//            noteDao.insert(new Note("Title 1", "Description 1", 1));
-//            noteDao.insert(new Note("Title 2", "Description 2", 2));
-//            noteDao.insert(new Note("Title 3", "Description 3", 3));
+            cartDao.insert(new Cart("Taco Holder Wave Shape Kitchen Food Pizza Shell Restaurant Baking Tool Stand Rack Display Pastry Stainless Steel Mexican Pancake(Silver)", "0123","https://www.jadroo.com/uploads/media/2019/06/TIoVh2ojUV/zhutu-medium.jpg",2 , 400, 5, null));
+            cartDao.insert(new Cart("Floor Mat",  "JRPCMWDGGX-M", "https://www.jadroo.com/uploads/media/old/images/products/products-4014774912_1753305594.jpg", 1, 300, 2, "size : 50-80cm-2"));
+            cartDao.insert(new Cart("Casual Non-Slip Males Slippers", "XMA012-R-44", "https://www.jadroo.com/uploads/media/old/2018/12/%E4%B8%BB%E5%9B%BE-%E5%B0%8F%E8%B4%9D%E9%BB%91%E8%89%B2.jpg", 2, 580, 2, "color: red-2,size: 44" ));
             return null;
         }
     }

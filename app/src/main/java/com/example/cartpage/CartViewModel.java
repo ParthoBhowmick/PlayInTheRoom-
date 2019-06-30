@@ -38,4 +38,9 @@ public class CartViewModel extends AndroidViewModel {
     public LiveData<List<Cart>> getAllCarts() {
         return allCarts;
     }
+
+    public Cart findProductnAction(String productName) {
+        return repository.findProductnAction(productName);
+    }
+
 }

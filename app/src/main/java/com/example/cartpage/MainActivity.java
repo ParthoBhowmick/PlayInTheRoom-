@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements TryCartFragment.O
     }
 
 
+    public void viewCart() {
+        Intent intent = new Intent(this,CartPage.class);
+        startActivity(intent);
+    }
 
 
     @Override
