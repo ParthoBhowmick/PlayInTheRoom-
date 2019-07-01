@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,8 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     private List<Cart> items = new ArrayList<>();
     private Context mcontext;
+
+    private CartViewModel cartViewModel;
 
 
     public CartAdapter(Context context) {
@@ -38,12 +41,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public CartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cart_single_element, parent, false);
+        //cartViewModel = ViewModelProviders.of().get(CartViewModel.class);
         return new CartHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
-        Cart currentitem = items.get(position);
+        final Cart currentitem = items.get(position);
 
         Glide.with(mcontext)
                 .load(currentitem.getDisplayImg())
@@ -52,9 +56,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         holder.productName.setText(currentitem.getProduct_name());
         holder.productPrice.setText("৳"+currentitem.getProuct_price()+"");
         holder.productSku.setText(currentitem.getSku());
-        holder.productVariation.setText(currentitem.getVaiants());
+        if(currentitem.getVaiants()!=null && currentitem.getVaiants().length()>0) {
+            holder.productVariation.setVisibility(View.VISIBLE);
+            holder.productVariation.setText(currentitem.getVaiants());
+        }
+
         holder.qtyEt.setText(currentitem.getQunatity()+"");
         holder.stockCount.setText(currentitem.getStock() + " products available");
+
+        holder.dltFrmCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CartPage)mcontext).deleteItem(currentitem);
+            }
+        });
 
     }
 
@@ -66,8 +81,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     class CartHolder extends RecyclerView.ViewHolder {
         private ImageView cartImg,dltFrmCart;
-        private CheckBox select;
-        private ToggleButton wishButton;
+        private ToggleButton wishButton,select;
         private TextView productName,productVariation,productSku,productPrice,stockCount;
         private Button plusBtn,minusBtn;
         private EditText qtyEt;

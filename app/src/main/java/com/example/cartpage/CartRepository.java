@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class CartRepository {
+public class CartRepository implements FindResponse {
     private CartDao cartDao;
     private LiveData<List<Cart>> allCarts;
     private Cart cart;
@@ -39,10 +39,15 @@ public class CartRepository {
         return allCarts;
     }
 
-    public Cart findProductnAction(String productName) {
-        return cartDao.findProductnAction(productName);
+    public LiveData<Cart> findProductnAction(String productSku) {
+        //new findProductAsyncTask(cartDao).execute(productSku);
+        return cartDao.findProductnAction(productSku);
     }
 
+    @Override
+    public Cart processFinish(Cart output) {
+        return output;
+    }
 
 
     private static class InsertCartAsyncTask extends AsyncTask<Cart, Void, Void> {
@@ -58,6 +63,25 @@ public class CartRepository {
             return null;
         }
     }
+
+
+//    private static class findProductAsyncTask extends AsyncTask<String, Void, Cart> {
+//        private CartDao cartDao;
+//        private FindResponse delegate = null;
+//
+//        private findProductAsyncTask(CartDao cartDao) {
+//            this.cartDao = cartDao;
+//        }
+//
+//        @Override
+//        protected Cart doInBackground(String... notes) {
+//            return cartDao.findProductnAction(notes[0]);
+//        }
+//
+//        protected void onPostExecute(Cart cart) {
+//            delegate.processFinish(cart);
+//        }
+//    }
 
     private static class UpdateCartAsyncTask extends AsyncTask<Cart, Void, Void> {
         private CartDao cartDao;

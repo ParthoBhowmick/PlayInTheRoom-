@@ -37,9 +37,10 @@ public class CartPage extends AppCompatActivity {
         });
 
 
+    }
 
-
-
+    public void deleteItem(Cart cart) {
+        cartViewModel.delete(cart);
     }
 
 }

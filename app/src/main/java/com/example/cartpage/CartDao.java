@@ -28,7 +28,7 @@ public interface CartDao {
     @Query("SELECT * FROM cart_table ORDER BY id ASC")
     LiveData<List<Cart>> getAllCarts();
 
-    @Query("SELECT * FROM cart_table WHERE product_name = :productName")
-    Cart findProductnAction(String productName);
+    @Query("SELECT * FROM cart_table WHERE sku = :productSku")
+    LiveData<Cart> findProductnAction(String productSku);
 
 }

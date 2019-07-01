@@ -2,12 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:background="#FFF"
-
-    android:padding="7dp"
     tools:layout_editor_absoluteX="5dp"
     tools:layout_editor_absoluteY="5dp">
 
@@ -15,7 +12,7 @@
         android:id="@+id/wishButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/button_favorite"
         android:checked="false"
@@ -26,23 +23,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <CheckBox
+    <ToggleButton
         android:id="@+id/select"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:button="@drawable/custom_check_box"
         android:checked="true"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
         android:id="@+id/cart_singleImg"
-        android:layout_width="105dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="14dp"
+        android:layout_width="113dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,6 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,10 +75,11 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1"
+            android:background="@android:color/transparent"
             android:digits="0123456789"
             android:gravity="center"
             android:inputType="number"
+            android:text="1"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -96,19 +96,28 @@
 
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/productName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
+        android:orientation="horizontal"
         android:text="Product Name"
         android:textColor="#000"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/wishButton" />
+
+   
+
+
 
 
     <TextView
@@ -119,6 +128,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="Product Variations"
+        android:visibility="gone"
         android:textColor="	#909090"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/productName"

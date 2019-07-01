@@ -10,7 +10,7 @@
                         android:startColor="#338AFF"
                         android:centerColor="#338AFF"
                         android:endColor="#338AFF"
-                        />
+                        android:angle="270" />
                     <size
                         android:width="30dp"
                         android:height="30dp" />
