@@ -1,6 +1,9 @@
 package com.example.cartpage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -25,6 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     private Context mcontext;
 
     private CartViewModel cartViewModel;
+
 
 
     public CartAdapter(Context context) {
@@ -46,7 +51,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CartHolder holder, int position) {
         final Cart currentitem = items.get(position);
 
         Glide.with(mcontext)
@@ -59,10 +64,91 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         if(currentitem.getVaiants()!=null && currentitem.getVaiants().length()>0) {
             holder.productVariation.setVisibility(View.VISIBLE);
             holder.productVariation.setText(currentitem.getVaiants());
+
         }
 
         holder.qtyEt.setText(currentitem.getQunatity()+"");
         holder.stockCount.setText(currentitem.getStock() + " products available");
+
+        holder.plusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String val = holder.qtyEt.getText().toString();
+                int total = Integer.parseInt(val);
+                total = total + 1;
+                if(total>currentitem.getStock()) {
+                    total = currentitem.getStock();
+                    Toast.makeText(mcontext, "Not more than "+ currentitem.getStock() + " Qty is not allowed", Toast.LENGTH_SHORT).show();
+                }
+
+                holder.qtyEt.setText(total+"");
+
+            }
+        });
+
+        holder.minusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String val = holder.qtyEt.getText().toString();
+                int total = Integer.parseInt(val);
+                total = total - 1;
+                if(total<1) {
+                    total = 1;
+                    Toast.makeText(mcontext, "Less than 1 Qty is not allowed", Toast.LENGTH_SHORT).show();
+                }
+                holder.qtyEt.setText(total+"");
+
+            }
+        });
+
+        holder.qtyEt.addTextChangedListener(new TextWatcher() {
+
+            String placeholder;
+            boolean isOnTextChanged = true;
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0) {
+                    if(isOnTextChanged) {
+                        currentitem.setQunatity(Integer.parseInt(s.toString()));
+                        ((CartPage)mcontext).updateCartItem(currentitem,mcontext);
+                    }
+                    isOnTextChanged = false;
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+                placeholder = s.toString();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+                String val = holder.qtyEt.getText().toString();
+                if(val.length()>0) {
+                    int total = Integer.parseInt(val);
+                    if(total<1) {
+                        holder.qtyEt.setText(placeholder+"");
+                        Toast.makeText(mcontext, "Negative Qty is not allowed", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(total>currentitem.getStock()) {
+                        holder.qtyEt.setText(placeholder+"");
+                        Toast.makeText(mcontext, "Not more than "+ currentitem.getStock() + " Qty is not allowed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                else {
+
+                }
+
+            }
+
+        });
 
         holder.dltFrmCart.setOnClickListener(new View.OnClickListener() {
             @Override

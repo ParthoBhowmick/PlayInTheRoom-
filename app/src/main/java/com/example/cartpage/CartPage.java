@@ -1,5 +1,6 @@
 package com.example.cartpage;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import java.util.List;
 public class CartPage extends AppCompatActivity {
 
     private CartViewModel cartViewModel;
+    final CartAdapter adapter = new CartAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class CartPage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final CartAdapter adapter = new CartAdapter(this);
+
         recyclerView.setAdapter(adapter);
 
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
@@ -36,11 +38,14 @@ public class CartPage extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void deleteItem(Cart cart) {
         cartViewModel.delete(cart);
+    }
+
+    public void updateCartItem(Cart cart, Context ctx) {
+        cartViewModel.update(cart,ctx);
     }
 
 }

@@ -2,7 +2,10 @@ package com.example.cartpage;
 
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
@@ -23,8 +26,8 @@ public class CartRepository implements FindResponse {
         new InsertCartAsyncTask(cartDao).execute(note);
     }
 
-    public void update(Cart note) {
-        new UpdateCartAsyncTask(cartDao).execute(note);
+    public void update(Cart note,Context ctx) {
+        new UpdateCartAsyncTask(cartDao,ctx).execute(note);
     }
 
     public void delete(Cart note) {
@@ -39,9 +42,8 @@ public class CartRepository implements FindResponse {
         return allCarts;
     }
 
-    public LiveData<Cart> findProductnAction(String productSku) {
-        //new findProductAsyncTask(cartDao).execute(productSku);
-        return cartDao.findProductnAction(productSku);
+    public void findProductnAction(String productSku, Cart cart, Context context) {
+        new findProductAsyncTask(cartDao, cart, context).execute(productSku);
     }
 
     @Override
@@ -65,35 +67,69 @@ public class CartRepository implements FindResponse {
     }
 
 
-//    private static class findProductAsyncTask extends AsyncTask<String, Void, Cart> {
-//        private CartDao cartDao;
-//        private FindResponse delegate = null;
-//
-//        private findProductAsyncTask(CartDao cartDao) {
-//            this.cartDao = cartDao;
-//        }
-//
-//        @Override
-//        protected Cart doInBackground(String... notes) {
-//            return cartDao.findProductnAction(notes[0]);
-//        }
-//
-//        protected void onPostExecute(Cart cart) {
-//            delegate.processFinish(cart);
-//        }
-//    }
+    private static class findProductAsyncTask extends AsyncTask<String, Void, Cart> {
+        private CartDao cartDao;
+        private Cart mcart;
+        private Context mcontext;
+
+        private findProductAsyncTask(CartDao cartDao, Cart cart, Context context) {
+            this.cartDao = cartDao;
+            this.mcart = cart;
+            this.mcontext = context;
+        }
+
+        @Override
+        protected Cart doInBackground(String... items) {
+            return cartDao.findProductnAction(items[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Cart cart) {
+            if (cart != null) {
+                int qty = mcart.getQunatity() + cart.getQunatity();
+                if (cart.getStock() < qty) {
+                    Toast.makeText(mcontext, "You can't add more than " + cart.getStock() + " products to Cart", Toast.LENGTH_SHORT).show();
+                } else {
+                    cart.setQunatity(qty);
+                    ((MainActivity)mcontext).updateCartItem(cart,mcontext);
+                }
+            } else {
+                //Toast.makeText(mcontext,  , Toast.LENGTH_SHORT).show();
+                ((MainActivity)mcontext).insertItem(mcart);
+            }
+        }
+    }
 
     private static class UpdateCartAsyncTask extends AsyncTask<Cart, Void, Void> {
         private CartDao cartDao;
+        private ProgressDialog dialog;
+        private Context ctx;
 
-        private UpdateCartAsyncTask(CartDao cartDao) {
+        private UpdateCartAsyncTask(CartDao cartDao,Context ctx) {
             this.cartDao = cartDao;
+            this.ctx = ctx;
         }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(ctx);
+            dialog.setMessage("Updating...");
+            dialog.setIndeterminate(true);
+            dialog.show();
+        }
+
 
         @Override
         protected Void doInBackground(Cart... notes) {
             cartDao.update(notes[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
         }
     }
 

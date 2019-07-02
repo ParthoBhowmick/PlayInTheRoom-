@@ -9,12 +9,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static android.widget.Toast.*;
 
@@ -56,29 +58,16 @@ public class MainActivity extends AppCompatActivity implements TryCartFragment.O
     public void addCart(Cart cart) {
 
         if (cart.getProduct_name()!=null) {
-            LiveData<Cart> tempCart = cartViewModel.findProductnAction(cart.getSku());
-            tempCart.observe(this, new Observer<Cart>() {
-                @Override
-                public void onChanged(Cart carto) {
-                    if(carto!=null)
-                    Toast.makeText(MainActivity.this, carto.getSku(), LENGTH_SHORT).show();
-                }
-            });
-
-//            if(tempCart.getSku()==cart.getSku()) {
-//                int qty = tempCart.getQunatity()+cart.getQunatity();
-//                if(cart.getStock()<qty) {
-//                    Toast.makeText(this, "You can't add more than "+cart.getStock()+ " products to Cart" , Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    cart.setQunatity(qty);
-//                    cartViewModel.update(cart);
-//                }
-//            }
-//            else {
-//                cartViewModel.insert(cart);
-//            }
+            cartViewModel.findProductnAction(cart.getSku(),cart,this);
         }
+    }
+
+    public void insertItem(Cart cart) {
+        cartViewModel.insert(cart);
+    }
+
+    public void updateCartItem(Cart cart,Context ctx) {
+        cartViewModel.update(cart,ctx);
     }
 
 

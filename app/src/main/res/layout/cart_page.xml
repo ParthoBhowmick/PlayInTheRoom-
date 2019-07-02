@@ -1,30 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cartList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="#D3D3D3"
+            android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cartList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <EditText
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:textSize="13dp"
+                android:hint="Enter Coupon Code Here"
+                android:layout_height="wrap_content"
+                />
 
-            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_weight="0.2"
+                android:layout_width="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Apply"
+                android:gravity="center"
+                android:padding="7dp"
+                android:textStyle="bold"
+                android:background="#23395d"
+                android:textSize="18sp"
+                android:textColor="#FFF"
+                android:layout_height="wrap_content" />
 
-        </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/gotoCart"
+            android:layout_width="wrap_content"
+            android:layout_height="52.56dp"
+            android:background="#23395d"
+            android:paddingLeft="15dp"
+            android:text=" Total :  "
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_weight="0.75"/>
+
+        <Button
+            android:id="@+id/addtocart"
+            android:layout_width="wrap_content"
+            android:layout_height="52.56dp"
+            android:background="#338AFF"
+            android:text="Check Out"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_weight="0.25"
+            android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

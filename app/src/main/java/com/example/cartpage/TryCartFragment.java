@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +84,7 @@ public class TryCartFragment extends Fragment {
             public void onClick(View v) {
                 Cart cart = new Cart("Children Barbie Luggage,20 inch", "JR-LG1003-17", "https://www.jadroo.com/uploads/media/2019/04/oJAFfgrtLk/zhutu-20inch-medium.jpg", 1, 4614, 100, "");
                 ((MainActivity)getActivity()).addCart(cart);
+
             }
         });
         return view;

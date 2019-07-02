@@ -1,6 +1,8 @@
 package com.example.cartpage;
 
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -29,6 +31,6 @@ public interface CartDao {
     LiveData<List<Cart>> getAllCarts();
 
     @Query("SELECT * FROM cart_table WHERE sku = :productSku")
-    LiveData<Cart> findProductnAction(String productSku);
+    Cart findProductnAction(String productSku);
 
 }

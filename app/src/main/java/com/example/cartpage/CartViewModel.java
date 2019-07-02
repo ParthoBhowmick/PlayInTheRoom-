@@ -2,12 +2,14 @@ package com.example.cartpage;
 
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CartViewModel extends AndroidViewModel {
     private CartRepository repository;
@@ -23,8 +25,8 @@ public class CartViewModel extends AndroidViewModel {
         repository.insert(note);
     }
 
-    public void update(Cart note) {
-        repository.update(note);
+    public void update(Cart note,Context ctx) {
+        repository.update(note,ctx);
     }
 
     public void delete(Cart note) {
@@ -39,8 +41,8 @@ public class CartViewModel extends AndroidViewModel {
         return allCarts;
     }
 
-    public LiveData<Cart> findProductnAction(String productSku) {
-        return repository.findProductnAction(productSku);
+    public void findProductnAction(String productSku, Cart cart, Context context) {
+        repository.findProductnAction(productSku,cart,context);
     }
 
 }
