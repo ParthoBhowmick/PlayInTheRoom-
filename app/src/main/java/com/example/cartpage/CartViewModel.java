@@ -3,6 +3,7 @@ package com.example.cartpage;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -21,16 +22,16 @@ public class CartViewModel extends AndroidViewModel {
         allCarts = repository.getAllCarts();
     }
 
-    public void insert(Cart note) {
-        repository.insert(note);
+    public void insert(Cart miniCart) {
+        repository.insert(miniCart);
     }
 
-    public void update(Cart note,Context ctx) {
-        repository.update(note,ctx);
+    public void update(Cart miniCart,Context ctx) {
+        repository.update(miniCart,ctx);
     }
 
-    public void delete(Cart note) {
-        repository.delete(note);
+    public void delete(Cart miniCart) {
+        repository.delete(miniCart);
     }
 
     public void deleteAllCarts() {

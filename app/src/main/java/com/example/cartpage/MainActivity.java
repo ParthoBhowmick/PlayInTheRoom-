@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements TryCartFragment.O
         if (cart.getProduct_name()!=null) {
             cartViewModel.findProductnAction(cart.getSku(),cart,this);
         }
+        else
+            cartViewModel.insert(cart);
     }
 
     public void insertItem(Cart cart) {

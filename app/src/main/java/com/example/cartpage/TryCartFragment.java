@@ -82,7 +82,7 @@ public class TryCartFragment extends Fragment {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cart cart = new Cart("Children Barbie Luggage,20 inch", "JR-LG1003-17", "https://www.jadroo.com/uploads/media/2019/04/oJAFfgrtLk/zhutu-20inch-medium.jpg", 1, 4614, 100, "");
+                Cart cart = new Cart("Children Barbie Luggage,20 inch", "JR-LG1003-17", "https://images-na.ssl-images-amazon.com/images/I/71EL-hRfhfL._AC_SY450_.jpg", 1, 4614, 100, "");
                 ((MainActivity)getActivity()).addCart(cart);
 
             }

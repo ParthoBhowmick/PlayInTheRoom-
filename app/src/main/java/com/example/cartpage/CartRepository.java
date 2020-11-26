@@ -141,8 +141,8 @@ public class CartRepository implements FindResponse {
         }
 
         @Override
-        protected Void doInBackground(Cart... notes) {
-            cartDao.delete(notes[0]);
+        protected Void doInBackground(Cart... carts) {
+            cartDao.delete(carts[0]);
             return null;
         }
     }

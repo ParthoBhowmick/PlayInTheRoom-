@@ -44,9 +44,9 @@ public abstract class CartDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            cartDao.insert(new Cart("Floor Mat",  "JRPCMWDGGX-M", "https://www.jadroo.com/uploads/media/old/images/products/products-4014774912_1753305594.jpg", 1, 300, 2, "size : 50-80cm-2"));
-            cartDao.insert(new Cart("Taco Holder Wave Shape Kitchen Food Pizza Shell Restaurant Baking Tool Stand Rack Display Pastry Stainless Steel Mexican Pancake(Silver)", "0123","https://www.jadroo.com/uploads/media/2019/06/TIoVh2ojUV/zhutu-medium.jpg",2 , 400, 5, null));
-            cartDao.insert(new Cart("Casual Non-Slip Males Slippers", "XMA012-R-44", "https://www.jadroo.com/uploads/media/old/2018/12/%E4%B8%BB%E5%9B%BE-%E5%B0%8F%E8%B4%9D%E9%BB%91%E8%89%B2.jpg", 2, 580, 2, "color: red-2,size: 44" ));
+            cartDao.insert(new Cart("Floor Mat",  "JRPCMWDGGX-M", "https://5.imimg.com/data5/KJ/PD/MY-4029679/designer-ladies-sandal-500x500.jpg", 1, 300, 2, "size : 50-80cm-2"));
+            cartDao.insert(new Cart("Taco Holder Wave Shape Kitchen Food Pizza Shell Restaurant Baking Tool Stand Rack Display Pastry Stainless Steel Mexican Pancake(Silver)", "0123","https://i5.walmartimages.com/asr/421ae399-b27e-4830-8983-4f711dea9c20_1.1ff865fa911a2124bd19e7a31bd3148a.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff",2 , 400, 5, null));
+            cartDao.insert(new Cart("Casual Non-Slip Males Slippers", "XMA012-R-44", "https://5.imimg.com/data5/NM/ET/MY-11928137/exclusive-ladies-slipper-500x500.jpg", 2, 580, 2, "color: red-2,size: 44" ));
             return null;
         }
     }
